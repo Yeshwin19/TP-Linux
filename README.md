@@ -3,16 +3,17 @@
 # Le jeu de plus ou moins.
 
 #!/bin/bash
-secretNumber=$(( ((`date +%N` / 1000) % 100) +1 ))     `#The secretnumber is derived by taking today's date, dividing it by 1000,making a modulo of 100 out of it and then adding 1 to it.`
 
-guess=-1                                               `#Initialise the numberoff guess.`
+secretNumber=$(( ((`date +%N` / 1000) % 100) +1 ))     `#Le numéro secret est obtenu en prenant la date du jour, en la divisant par 1000, en en faisant un modulo de 100 puis en lui ajoutant 1.`
 
-while [ "$guess" != "$secretNumber" ]; do              `#If guess is not equal to secretnumber then print the message below.`
+guess=-1                                               `#Initialiser le nombre de guess.`
+
+while [ "$guess" != "$secretNumber" ]; do              `#Si devine n'est pas égal à secretnumber, imprimez le message ci-dessous.`
     echo -n "I am thinking of a number between 1 and 100. Enter your guess:"
     
    read guess                                         
     
-   if [ "$guess" = "" ]; then                         `#This is to deal with exceptions in case a letter is inserted.`
+   if [ "$guess" = "" ]; then                         `#ça c'est pour gérer les exceptions.`
         
    echo "Please enter a number."
     
@@ -38,10 +39,17 @@ done
 
 #!/bin/bash
 
-DATE=$(date +%Y-%m-%d-%H%M%S)       `#Thisi s done so that several backups can be safely separated from one another. The variables are given the following format, for example: Year-Month-Day-HourMinuteSecond, so for example 2017-09-07-152833.`
+DATE=$(date +%Y-%m-%d-%H%M%S)       `#Ceci est fait pour que plusieurs sauvegardes puissent être séparées en toute sécurité. Les variables ont par exemple le format suivant: Year-Month-Day-HourMinuteSecond, par exemple 2017-09-07-152833`
 
-BACKUP_DIR="/targetdirectory/backup" `#Here I specified the directory in which the backup should be created. The last subdirectory is not ended with “/”, though.`
+BACKUP_DIR="/targetdirectory/backup" `#Ici, j'ai spécifié le répertoire dans lequel la sauvegarde devrait être créée. Le dernier sous-répertoire ne se termine pas par “/”, bien que.`
 
-SOURCE="$HOME/sourcedirectory"    `#n this line, I specified which directories you want to include in the archive.`
+SOURCE="$HOME/sourcedirectory"    `#Dans cette ligne, j'ai spécifié quels répertoires vous souhaitez inclure dans l'archive.`
 
-tar -cvzpf $BACKUP_DIR/backup-$DATE.tar.gz $SOURCE  `#-cvzpf creates an archive (-c), the steps are displayed (-v), it’s compressed with gzip (-z), the access rights are retained (-p), and everything is output in the following file (-f). To finish up, inform tar using the variable $SOURCE what should absolutely archive. It’s conceivable that you can also exclude directories or files with --exclude or -X that don’t need to be included in the backup. $BACKUP_DIR/backup-$DATE.tar.gz denoted the directory ($BACKUP_DIR) and the file in which the backup should be saved.`
+tar -cvzpf $BACKUP_DIR/backup-$DATE.tar.gz $SOURCE  `#-cvzpf crée une archive (-c), les étapes sont affichées (-v), compressées avec gzip (-z), les droits d'accès sont conservés (-p) et tout est affiché dans le fichier suivant (-f). . Pour finir, informez tar en utilisant la variable $ SOURCE ce qu’il faut absolument archiver. Il est concevable que vous puissiez également exclure des répertoires ou des fichiers avec --exclude ou -X qui n’ont pas besoin d’être inclus dans la sauvegarde. $ BACKUP_DIR / backup- $ DATE.tar.gz désignait le répertoire ($ BACKUP_DIR) et le fichier dans lequel la sauvegarde devait être sauvegardée.`
+
+
+## Youtube-dl.
+
+#!/bin/bash
+
+youtube-dl -x https://www.youtube.com/watch?v=kda8QGA3i-c   `#C’est la ligne de commande qui permet de télécharger une vidéo à partir de YouTube puis d’extraire la musique de la vidéo.`
